@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h1>My Favorite Mechanical Switches</h1>
-    <switch-list />
+    <h1>Sally's Favorite Mechanical Switches</h1>
+    <switch-list :switches="switches" />
   </div>
 </template>
 
