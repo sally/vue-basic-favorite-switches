@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Sally's Favorite Mechanical Switches</h1>
+    <switch-form />
     <switch-list :switches="switches"
       @update:switch="updateSwitch"
       @delete:switch="deleteSwitch"
@@ -9,12 +10,14 @@
 </template>
 
 <script>
-import SwitchList from './components/SwitchList.vue'
+import SwitchForm from './components/SwitchForm.vue';
+import SwitchList from './components/SwitchList.vue';
 
 export default {
   name: 'App',
   components: {
-    SwitchList
+    SwitchForm,
+    SwitchList,
   },
   data() {
     return {
