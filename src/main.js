@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import 'mini.css/dist/mini-default.min.css'
 
 Vue.config.productionTip = false
 
