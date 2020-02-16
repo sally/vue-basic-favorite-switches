@@ -36,10 +36,10 @@
 
                     <td data-label="Modify" v-if="mechanicalSwitch.id === idBeingEdited">
                         <button class="small tertiary" @click="updateSwitch(mechanicalSwitch)">Update</button>
-                        <button class="small secondary" @click="cancelUpdate">Cancel</button>
+                        <button class="small secondary" @click="cancelUpdate(mechanicalSwitch)">Cancel</button>
                     </td>
                     <td data-label="Modify" v-else>
-                        <button class="small primary" @click="updateMode(mechanicalSwitch.id)">Modify</button>
+                        <button class="small primary" @click="updateMode(mechanicalSwitch)">Modify</button>
                     </td>
 
                     <td data-label="Delete">
@@ -63,15 +63,17 @@ export default {
         switches: Array
     },
     methods: {
-        cancelUpdate() {
+        cancelUpdate(mechanicalSwitch) {
+            Object.assign(mechanicalSwitch, this.cachedSwitch);
             this.idBeingEdited = null;
         },
         deleteSwitch(id) {
             this.idBeingEdited = null;
             this.$emit('delete:switch', id);
         },
-        updateMode(id) {
-            this.idBeingEdited = id;
+        updateMode(mechanicalSwitch) {
+            this.cachedSwitch = Object.assign({}, mechanicalSwitch);
+            this.idBeingEdited = mechanicalSwitch.id;
         },
         updateSwitch(mechanicalSwitch) {
             this.idBeingEdited = null;
