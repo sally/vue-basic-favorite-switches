@@ -13,37 +13,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="mechanicalSwitch in switches" :key="mechanicalSwitch.id">
-                    <td data-label="Brand" v-if="mechanicalSwitch.id === idBeingEdited">
-                        <input type="text" v-model="mechanicalSwitch.brand" />
+                <tr v-for="mechSwitch in switches" :key="mechSwitch.id">
+                    <td data-label="Brand" v-if="mechSwitch.id === idBeingEdited">
+                        <input type="text" v-model="mechSwitch.brand" />
                     </td>
-                    <td data-label="Brand" v-else>{{ mechanicalSwitch.brand }}</td>
+                    <td data-label="Brand" v-else>{{ mechSwitch.brand }}</td>
 
-                    <td data-label="Name" v-if="mechanicalSwitch.id === idBeingEdited">
-                        <input type="text" v-model="mechanicalSwitch.name" />
+                    <td data-label="Name" v-if="mechSwitch.id === idBeingEdited">
+                        <input type="text" v-model="mechSwitch.name" />
                     </td>
-                    <td data-label="Name" v-else>{{ mechanicalSwitch.name }}</td>
+                    <td data-label="Name" v-else>{{ mechSwitch.name }}</td>
 
-                    <td data-label="Type" v-if="mechanicalSwitch.id === idBeingEdited">
-                        <input type="text" v-model="mechanicalSwitch.type" />
+                    <td data-label="Type" v-if="mechSwitch.id === idBeingEdited">
+                        <input type="text" v-model="mechSwitch.type" />
                     </td>
-                    <td data-label="Type" v-else>{{ mechanicalSwitch.type }}</td>
+                    <td data-label="Type" v-else>{{ mechSwitch.type }}</td>
 
-                    <td data-label="Bottom-Out" v-if="mechanicalSwitch.id === idBeingEdited">
-                        <input type="text" v-model="mechanicalSwitch.bottomOutForce" />
+                    <td data-label="Bottom-Out" v-if="mechSwitch.id === idBeingEdited">
+                        <input type="text" v-model="mechSwitch.bottomOutForce" />
                     </td>
-                    <td data-label="Bottom-Out" v-else>{{ mechanicalSwitch.bottomOutForce }}</td>
+                    <td data-label="Bottom-Out" v-else>{{ mechSwitch.bottomOutForce }}</td>
 
-                    <td data-label="Modify" v-if="mechanicalSwitch.id === idBeingEdited">
-                        <button class="small tertiary" @click="updateSwitch(mechanicalSwitch)">Update</button>
-                        <button class="small secondary" @click="cancelUpdate(mechanicalSwitch)">Cancel</button>
+                    <td data-label="Modify" v-if="mechSwitch.id === idBeingEdited">
+                        <button class="small tertiary" @click="updateSwitch(mechSwitch)">Update</button>
+                        <button class="small secondary" @click="cancelUpdate(mechSwitch)">Cancel</button>
                     </td>
                     <td data-label="Modify" v-else>
-                        <button class="small primary" @click="updateMode(mechanicalSwitch)">Modify</button>
+                        <button class="small primary" @click="updateMode(mechSwitch)">Modify</button>
                     </td>
 
                     <td data-label="Delete">
-                        <button class="small inverse" @click="deleteSwitch(mechanicalSwitch.id)">Delete</button>
+                        <button class="small inverse" @click="deleteSwitch(mechSwitch.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -63,21 +63,21 @@ export default {
         switches: Array
     },
     methods: {
-        cancelUpdate(mechanicalSwitch) {
-            Object.assign(mechanicalSwitch, this.cachedSwitch);
+        cancelUpdate(mechSwitch) {
+            Object.assign(mechSwitch, this.cachedSwitch);
             this.idBeingEdited = null;
         },
         deleteSwitch(id) {
             this.idBeingEdited = null;
             this.$emit('delete:switch', id);
         },
-        updateMode(mechanicalSwitch) {
-            this.cachedSwitch = Object.assign({}, mechanicalSwitch);
-            this.idBeingEdited = mechanicalSwitch.id;
+        updateMode(mechSwitch) {
+            this.cachedSwitch = Object.assign({}, mechSwitch);
+            this.idBeingEdited = mechSwitch.id;
         },
-        updateSwitch(mechanicalSwitch) {
+        updateSwitch(mechSwitch) {
             this.idBeingEdited = null;
-            this.$emit('update:switch', mechanicalSwitch);
+            this.$emit('update:switch', mechSwitch);
         },
     },
 }
