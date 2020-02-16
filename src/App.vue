@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <h1>Sally's Favorite Mechanical Switches</h1>
-    <switch-list :switches="switches" @delete:switch="deleteSwitch" />
+    <switch-list :switches="switches"
+      @update:switch="updateSwitch"
+      @delete:switch="deleteSwitch"
+    />
   </div>
 </template>
 
@@ -71,6 +74,11 @@ export default {
     }
   },
   methods: {
+    updateSwitch(switchToUpdate) {
+      this.switch = this.switches.map(mechSwitch => {
+        mechSwitch.id === switchToUpdate.id ? switchToUpdate : mechSwitch;
+      })
+    },
     deleteSwitch(idToDelete) {
       this.switches = this.switches.filter(mechSwitch => mechSwitch.id != idToDelete);
     }
