@@ -43,7 +43,7 @@
                     </td>
 
                     <td data-label="Delete">
-                        <button class="small inverse" @click="deleteSwitch(id)">Delete</button>
+                        <button class="small inverse" @click="deleteSwitch(mechanicalSwitch.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
