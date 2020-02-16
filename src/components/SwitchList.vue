@@ -8,6 +8,7 @@
                     <th>Name</th>
                     <th>Type</th>
                     <th>Bottom-Out</th>
+                    <th>Modify</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td data-label="Name">{{ mechanicalSwitch.name }}</td>
                     <td data-label="Type">{{ mechanicalSwitch.type }}</td>
                     <td data-label="Bottom-Out Force">{{ mechanicalSwitch.bottomOutForce }}</td>
+                    <td data-label="Modify"><button class="small inverse" @click="$emit('delete:switch', mechanicalSwitch.id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
