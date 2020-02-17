@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <h1>Sally's Favorite Mechanical Switches</h1>
-    <switch-form />
+    <switch-form
+      @add:switch="addSwitch"
+    />
     <switch-list :switches="switches"
       @update:switch="updateSwitch"
       @delete:switch="deleteSwitch"
@@ -79,6 +81,13 @@ export default {
     }
   },
   methods: {
+    addSwitch(switchToAdd) {
+      const newSwitch = {
+        ...switchToAdd,
+        id: uuidv4(),
+      }
+      this.switches.push(newSwitch);
+    },
     updateSwitch(switchToUpdate) {
       this.switch = this.switches.map(mechSwitch => {
         mechSwitch.id === switchToUpdate.id ? switchToUpdate : mechSwitch;
