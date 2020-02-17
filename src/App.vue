@@ -87,6 +87,9 @@ export default {
         id: uuidv4(),
       }
       this.switches.push(newSwitch);
+      for (const property in switchToAdd) {
+        switchToAdd[property] = null;
+      }
     },
     updateSwitch(switchToUpdate) {
       this.switch = this.switches.map(mechSwitch => {
