@@ -97,4 +97,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#app td {
+  text-overflow: clip;
+}
+
+#app input[type='text'] {
+  width: 100%;
+}
 </style>
