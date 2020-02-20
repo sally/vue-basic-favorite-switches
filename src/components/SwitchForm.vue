@@ -50,7 +50,7 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-offset-4 col-md-4">
-                            <input type="submit" class="button tertiary" value="Add Switch" />
+                            <input type="submit" class="button primary" value="Add Switch" />
                         </div>
                     </div>
 
