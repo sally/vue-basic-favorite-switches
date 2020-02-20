@@ -12,6 +12,8 @@
                                 v-model="mechSwitch.brand"
                                 placeholder="e.g. 'Gateron'"
                                 v-bind:class="{ 'has-error': errors && invalidBrand }"
+                                @keypress="clearStatus"
+                                @focus="clearStatus"
                             />
                         </div>
                     </div>
@@ -25,6 +27,8 @@
                                 v-model="mechSwitch.name"
                                 placeholder="e.g. 'Brown'"
                                 v-bind:class="{ 'has-error': errors && invalidName }"
+                                @keypress="clearStatus"
+                                @focus="clearStatus"
                             />
                         </div>
                     </div>
@@ -38,6 +42,8 @@
                                 v-model="mechSwitch.type"
                                 placeholder="e.g. 'Tactile'"
                                 v-bind:class="{ 'has-error': errors && invalidType }"
+                                @keypress="clearStatus"
+                                @focus="clearStatus"
                             />
                         </div>
                     </div>
@@ -51,6 +57,8 @@
                                 v-model="mechSwitch.bottomOutForce"
                                 placeholder="e.g. '60g'"
                                 v-bind:class="{ 'has-error': errors && invalidBottomOut }"
+                                @keypress="clearStatus"
+                                @focus="clearStatus"
                             />
                         </div>
                     </div>
@@ -111,11 +119,15 @@ export default {
         },
     },
     methods: {
+        clearStatus() {
+            this.errors = false;
+            this.success = false;
+        },
         validateSwitch() {
             if (this.invalidBrand || this.invalidName || this.invalidType || this.invalidBottomOut) {
                 this.errors = true;
             } else {
-                this.errors = false;
+                this.clearStatus();
             }
 
             if (!this.errors) {
@@ -126,7 +138,7 @@ export default {
 
                 this.success = true;
                 setTimeout(() => {
-                    this.success = false;
+                    this.clearStatus();
                 }, 5000);
             }
         }
