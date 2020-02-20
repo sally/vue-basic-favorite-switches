@@ -5,21 +5,6 @@
                 <form @submit.prevent="validateSwitch">
                     <div class="row">
                         <div class="col-sm-12 col-md-4">
-                            <label for="brand">Brand</label>
-                        </div>
-                        <div class="col-sm-12 col-md-8">
-                            <input type="text"
-                                v-model="mechSwitch.brand"
-                                placeholder="e.g. 'Gateron'"
-                                v-bind:class="{ 'has-error': errors && invalidBrand }"
-                                @keypress="clearStatus"
-                                @focus="clearStatus"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12 col-md-4">
                             <label for="name">Name</label>
                         </div>
                         <div class="col-sm-12 col-md-8">
@@ -97,7 +82,6 @@ export default {
             errors: false,
             success: false,
             mechSwitch: {
-                brand: null,
                 name: null,
                 type: null,
                 bottomOutForce: null,
@@ -105,9 +89,6 @@ export default {
         }
     },
     computed: {
-        invalidBrand() {
-            return !this.mechSwitch.brand;
-        },
         invalidName() {
             return !this.mechSwitch.name;
         },
@@ -124,7 +105,7 @@ export default {
             this.success = false;
         },
         validateSwitch() {
-            if (this.invalidBrand || this.invalidName || this.invalidType || this.invalidBottomOut) {
+            if (this.invalidName || this.invalidType || this.invalidBottomOut) {
                 this.errors = true;
             } else {
                 this.clearStatus();
