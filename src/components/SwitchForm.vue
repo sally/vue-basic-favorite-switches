@@ -67,6 +67,10 @@
                                 <span class="icon-alert inverse"></span>
                                 Missing fields
                             </mark>
+                            <mark v-if="success" class="tertiary switch-form-error">
+                                <span class="icon-info inverse"></span>
+                                Successfully added
+                            </mark>
                         </div>
                     </div>
                 </form>
@@ -81,6 +85,7 @@ export default {
     data() {
         return {
             errors: false,
+            success: false,
             mechSwitch: {
                 brand: null,
                 name: null,
@@ -111,7 +116,14 @@ export default {
                 this.errors = false;
             }
 
-            !this.errors && this.$emit('add:switch', this.mechSwitch);
+            if (!this.errors) {
+                this.$emit('add:switch', this.mechSwitch);
+                this.success = true;
+
+                setTimeout(() => {
+                    this.success = false;
+                }, 5000);
+            }
         }
     }
 }
