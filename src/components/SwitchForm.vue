@@ -73,13 +73,13 @@
                         <div class="col-sm-12 col-md-offset-4 col-md-4">
                             <transition name="fade">
                                 <mark v-if="errors" class="secondary switch-form-error">
-                                <span class="icon-alert inverse"></span>
-                                Missing fields
-                            </mark>
-                            <mark v-if="success" class="tertiary switch-form-error">
-                                <span class="icon-info inverse"></span>
-                                Successfully added
-                            </mark>
+                                    <span class="icon-alert inverse"></span>
+                                    Missing fields
+                                </mark>
+                                <mark v-if="success" class="tertiary switch-form-error">
+                                    <span class="icon-info inverse"></span>
+                                    Successfully added
+                                </mark>
                             </transition>
                         </div>
                     </div>
