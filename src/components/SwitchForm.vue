@@ -118,8 +118,11 @@ export default {
 
             if (!this.errors) {
                 this.$emit('add:switch', this.mechSwitch);
-                this.success = true;
+                for (const property in this.mechSwitch) {
+                    this.mechSwitch[property] = null;
+                }
 
+                this.success = true;
                 setTimeout(() => {
                     this.success = false;
                 }, 5000);
