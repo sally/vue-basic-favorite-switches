@@ -63,7 +63,8 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-offset-4 col-md-4">
-                            <mark v-if="errors" class="secondary switch-form-error">
+                            <transition name="fade">
+                                <mark v-if="errors" class="secondary switch-form-error">
                                 <span class="icon-alert inverse"></span>
                                 Missing fields
                             </mark>
@@ -71,6 +72,7 @@
                                 <span class="icon-info inverse"></span>
                                 Successfully added
                             </mark>
+                            </transition>
                         </div>
                     </div>
                 </form>
@@ -139,5 +141,12 @@ export default {
 
     .has-error {
         border: 1px solid #d92121;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
     }
 </style>
