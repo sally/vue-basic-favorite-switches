@@ -70,6 +70,11 @@ export default {
             this.$emit('delete:switch', id);
         },
         updateMode(mechSwitch) {
+            if (this.idBeingEdited) {
+                this.switches.map(mechSwitch => {
+                    mechSwitch.id === this.idBeingEdited ? Object.assign(mechSwitch, this.cachedSwitch) : mechSwitch;
+                })
+            }
             this.cachedSwitch = Object.assign({}, mechSwitch);
             this.idBeingEdited = mechSwitch.id;
         },
