@@ -16,23 +16,44 @@
                     <tbody>
                         <tr v-for="mechSwitch in switches" :key="mechSwitch.id">
                             <td data-label="Name" v-if="mechSwitch.id === idBeingEdited">
-                                <input type="text" v-model="mechSwitch.name" />
+                                <input type="text"
+                                    v-model="mechSwitch.name"
+                                    v-bind:class="{ 'has-error': errors && invalidName(mechSwitch) }"
+                                    @keypress="clearStatus"
+                                    @focus="clearStatus"
+                                />
                             </td>
                             <td data-label="Name" v-else>{{ mechSwitch.name }}</td>
 
                             <td data-label="Type" v-if="mechSwitch.id === idBeingEdited">
-                                <input type="text" v-model="mechSwitch.type" />
+                                <input type="text"
+                                    v-model="mechSwitch.type"
+                                    v-bind:class="{ 'has-error': errors && invalidType(mechSwitch) }"
+                                    @keypress="clearStatus"
+                                    @focus="clearStatus"
+                                />
                             </td>
                             <td data-label="Type" v-else>{{ mechSwitch.type }}</td>
 
                             <td data-label="Bottom-Out" v-if="mechSwitch.id === idBeingEdited">
-                                <input type="text" v-model="mechSwitch.bottomOutForce" />
+                                <input type="text"
+                                    v-model="mechSwitch.bottomOutForce"
+                                    v-bind:class="{ 'has-error': errors && invalidType(mechSwitch) }"
+                                    @keypress="clearStatus"
+                                    @focus="clearStatus"
+                                />
                             </td>
                             <td data-label="Bottom-Out" v-else>{{ mechSwitch.bottomOutForce }}</td>
 
                             <td data-label="Modify" v-if="mechSwitch.id === idBeingEdited">
-                                <button class="small tertiary" @click="updateSwitch(mechSwitch)">Update</button>
-                                <button class="small secondary" @click="cancelUpdate(mechSwitch)">Cancel</button>
+                                <transition name="fade">
+                                    <button v-if="errors" class="small secondary">
+                                        Missing fields
+                                    </button>
+                                    <button v-else class="small tertiary" @click="validateSwitch(mechSwitch)">Update</button>
+                                </transition>
+                                <button class="small" @click="cancelUpdate(mechSwitch)">Cancel</button>
+                                <br />
                             </td>
                             <td data-label="Modify" v-else>
                                 <button class="small primary" @click="updateMode(mechSwitch)">Modify</button>
@@ -55,6 +76,7 @@ export default {
     data() {
         return {
             idBeingEdited: null,
+            errors: null,
         }
     },
     props: {
@@ -70,6 +92,7 @@ export default {
             this.$emit('delete:switch', id);
         },
         updateMode(mechSwitch) {
+            this.clearStatus();
             if (this.idBeingEdited) {
                 this.switches.map(mechSwitch => {
                     mechSwitch.id === this.idBeingEdited ? Object.assign(mechSwitch, this.cachedSwitch) : mechSwitch;
@@ -78,10 +101,31 @@ export default {
             this.cachedSwitch = Object.assign({}, mechSwitch);
             this.idBeingEdited = mechSwitch.id;
         },
-        updateSwitch(mechSwitch) {
-            this.idBeingEdited = null;
-            this.$emit('update:switch', mechSwitch);
+        validateSwitch(mechSwitch) {
+            console.log(this.invalidName(mechSwitch));
+            if (this.invalidName(mechSwitch) || this.invalidName(mechSwitch) || this.invalidBottomOut(mechSwitch)) {
+                this.errors = true;
+            } else {
+                this.clearStatus();
+            }
+
+            if (!this.errors) {
+                this.$emit('update:switch', mechSwitch);
+            }
         },
+        clearStatus() {
+            this.errors = false;
+        },
+        invalidName(mechSwitch) {
+            return !mechSwitch.name;
+        },
+        invalidType(mechSwitch) {
+            return !mechSwitch.type;
+        },
+        invalidBottomOut(mechSwitch) {
+            return !mechSwitch.bottomOutForce;
+        },
+
     },
 }
 </script>

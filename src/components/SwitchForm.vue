@@ -127,19 +127,4 @@ export default {
 }
 </script>
 
-<style scoped>
-    .switch-form-error {
-        margin: 8px;
-    }
-
-    .has-error {
-        border: 1px solid #d92121;
-    }
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
-</style>
+<style scoped />
